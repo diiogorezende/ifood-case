@@ -1,0 +1,5 @@
+outs:
+- md5: 126e7ab7a556ec2e866061b06916877d
+  size: 2757
+  hash: md5
+  path: offers.json
