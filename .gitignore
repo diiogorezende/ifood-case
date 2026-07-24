@@ -1,2 +1,5 @@
 ._*
 *.tar.gz
+
+.venv/
+.dvc/
