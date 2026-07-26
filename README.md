@@ -51,6 +51,12 @@ Uplift médio `(P(sucesso tratado) − P(compra orgânica no controle))` por tip
 as janelas de controle (gaps sem oferta) tendem a ser mais longas que a duração típica da
 oferta — ambos inflam artificialmente a taxa do controle.
 
+**Contradição não resolvida**: usando a mesma janela orgânica, mas uma métrica comparável
+(qualquer transação, sem exigir visualização) em vez de `success`, o notebook 05 encontra
+uplift **positivo** para `bogo` (+18.4 p.p.) e `discount` (+13.5 p.p.). A divergência de sinal
+vem da troca de outcome do tratado entre os dois notebooks, não de um bug — mas nenhuma das
+duas estimativas deve ser tomada como definitiva.
+
 ## Simulação de ROI (`main.py`)
 
 Backtest no conjunto de teste, usando o `success` real como proxy do resultado caso a oferta
