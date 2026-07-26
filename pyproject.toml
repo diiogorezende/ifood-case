@@ -16,3 +16,8 @@ dependencies = [
     "seaborn>=0.13.2",
     "xgboost>=3.3.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

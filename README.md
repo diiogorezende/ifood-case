@@ -113,3 +113,13 @@ uv run python -m src.features.build_features  # -> model_features.parquet
 uv run python -m src.models.train           # treina modelos + scored_offers.parquet
 uv run python main.py                       # simulação de ROI (--margin-rate, --send-cost)
 ```
+
+## Como rodar os testes
+
+```bash
+uv run python -m pytest tests/ -v
+```
+
+Testes unitários (funções puras de `process_raw.py`/`train.py`/`main.py`) e de integração
+(pipeline `process_raw_data` → `build_features`, e `train_response_models`/`simulate_roi`
+ponta-a-ponta com dados sintéticos em `tmp_path`), em `tests/`.
