@@ -29,22 +29,22 @@ final e reprodutível de cada etapa (PySpark no processamento/features, pandas n
   (`rowsBetween(unboundedPreceding, -1)`).
 - **Feature `email` (canal)** removida (constante, 100% das ofertas, zero variância).
 
-## Resultados — modelo de resposta (Parte A)
+## Resultados — modelo de resposta
 
 3 modelos comparados no conjunto de teste (20%, holdout estratificado); **LightGBM** escolhido
 como final:
 
 | Modelo    | ROC-AUC | PR-AUC | Brier |
 |-----------|---------|--------|-------|
-| LogReg    | baseline linear | — | — |
-| XGBoost   | próximo ao LightGBM | — | — |
+| LogReg    | 0.738 | 0.627 | 0.198 |
+| XGBoost   | 0.799 | 0.701 | 0.176 |
 | **LightGBM** | **0.807** | **0.712** | **0.173** |
 
 (Métricas completas de todos os modelos em `src/models/model_metadata.json` / notebook 07.)
 
-## Resultados — uplift T-Learner (Parte B, stretch goal)
+## Resultados — uplift T-Learner
 
-Uplift médio (P(sucesso tratado) − P(compra orgânica no controle)) por tipo de oferta, todos
+Uplift médio `(P(sucesso tratado) − P(compra orgânica no controle))` por tipo de oferta, todos
 **negativos** (discount −0.22, informational −0.25, bogo −0.28). Resultado tratado como
 **não conclusivo**, não como efeito causal real: a definição de sucesso é assimétrica
 (tratado exige visualização + redenção/transação; controle exige apenas qualquer transação) e
@@ -55,13 +55,13 @@ oferta — ambos inflam artificialmente a taxa do controle.
 
 Backtest no conjunto de teste, usando o `success` real como proxy do resultado caso a oferta
 fosse enviada. Só `bogo`/`discount` entram na conta monetária (`informational` não tem
-`min_value`/`discount_value` — é lever de engajamento, não de receita direta).
+`min_value`/`discount_value`).
 
 - Todos os `bogo` têm `discount_value == min_value` (devolução de 100%) → só é lucrativo com
   margem ≥100%, ou seja, é estruturalmente um *loss-leader* de engajamento, não de lucro.
 - Com premissas default (`margin_rate=0.30`, `send_cost=0.05`): política atual (enviar para
-  todos, 10 135 envios) resulta em **-9 152** de lucro; política guiada pelo modelo (enviar só
-  quando valor esperado > 0, 3 428 envios, 6 707 evitados) resulta em **+1 246** de lucro
+  todos, 10135 envios) resulta em **-9152** de lucro; política guiada pelo modelo (enviar só
+  quando valor esperado > 0, 3428 envios, 6707 evitados) resulta em **+1246** de lucro
   (**+113.6%** de lift). Parâmetros ajustáveis via `--margin-rate`/`--send-cost`.
 
 ## Pontos fortes
@@ -77,14 +77,14 @@ fosse enviada. Só `bogo`/`discount` entram na conta monetária (`informational`
 
 ## Fragilidades e limitações
 
-- **Uplift (Parte B) não é causal**: pseudo-controle tem viés estrutural conhecido (assimetria
+- **Uplift não é causal**: pseudo-controle tem viés estrutural conhecido (assimetria
   de outcome e de duração de janela); resultado não deve orientar decisão de negócio sozinho.
 - **ROI depende de premissas não observadas nos dados** (`margin_rate`, `send_cost`) — números
   absolutos são sensíveis a esses parâmetros, só as ordens de grandeza/heterogeneidade são
   robustas.
 - **Sem tuning de hiperparâmetros** — modelos usam parâmetros default do scikit-learn/LightGBM/
   XGBoost; sem busca de espaço de hiperparâmetros nem calibração de probabilidade.
-- **Sem validação temporal (walk-forward)** — split é aleatório estratificado, não por tempo;
+- **Sem validação temporal** — split é aleatório estratificado, não por tempo;
   em produção o modelo será usado para prever o futuro a partir do passado.
 - Ambiguidade não resolvida nas tags de tempo empatadas (transação e oferta no mesmo timestamp)
   no PySpark window; edge case raro, aceito como limitação.
@@ -94,11 +94,10 @@ fosse enviada. Só `bogo`/`discount` entram na conta monetária (`informational`
 - Validação temporal (split out-of-time) e recalibração periódica do modelo.
 - Uplift causal mais robusto (matching/propensity score, ou desenho experimental real com
   grupo de controle randomizado) em vez do pseudo-controle atual.
-- Tuning de hiperparâmetros + calibração de probabilidade (Platt/isotonic) para o simulador de
+- Tuning de hiperparâmetros + calibração de probabilidade para o simulador de
   ROI ser mais sensível a limiares de decisão.
 - Otimização por cliente/oferta (não só threshold global de valor esperado) e teste A/B online
   para validar o lift estimado em produção.
-- Deck de apresentação executiva (`presentation/`) com os achados acima.
 
 ## Como rodar
 
