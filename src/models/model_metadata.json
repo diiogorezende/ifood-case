@@ -1,0 +1,35 @@
+{
+  "feature_cols": [
+    "offer_type",
+    "discount_value",
+    "min_value",
+    "duration",
+    "channel_mobile",
+    "channel_social",
+    "channel_web",
+    "received_time",
+    "remaining_days",
+    "age",
+    "gender",
+    "credit_card_limit",
+    "is_profile_completed",
+    "registration_year",
+    "offers_received_prior",
+    "prior_success_rate",
+    "prior_view_rate",
+    "txn_count_prior",
+    "txn_amount_sum_prior",
+    "txn_amount_avg_prior",
+    "days_since_last_txn"
+  ],
+  "categorical_cols": [
+    "offer_type",
+    "gender"
+  ],
+  "target_col": "success",
+  "id_cols": [
+    "account_id",
+    "offer_id"
+  ],
+  "final_model": "lgbm_model.joblib"
+}
