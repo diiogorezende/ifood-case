@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" font-family="Arial, Helvetica, sans-serif">
+  <!-- Fundo -->
+  <rect width="1200" height="240" fill="#ffffff"/>
+
+  <!-- Titulo -->
+  <text x="600" y="28" font-size="22" font-weight="700" text-anchor="middle" fill="#2d2d2d">Próximos passos</text>
+  <rect x="560" y="38" width="80" height="4" rx="2" fill="#EA1D2C"/>
+
+  <!-- Linha do tempo -->
+  <line x1="150" y1="140" x2="1050" y2="140" stroke="#F3D9DB" stroke-width="4"/>
+  <polygon points="398,132 412,140 398,148" fill="#EA1D2C"/>
+  <polygon points="748,132 762,140 748,148" fill="#EA1D2C"/>
+
+  <!-- ===================== Marco 1: Piloto ===================== -->
+  <g>
+    <circle cx="250" cy="140" r="26" fill="#EA1D2C"/>
+    <!-- icone: bandeira -->
+    <line x1="246" y1="128" x2="246" y2="152" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="246,128 262,134 246,140" fill="#ffffff"/>
+
+    <text x="250" y="100" font-size="15" font-weight="700" text-anchor="middle" fill="#2d2d2d">Piloto</text>
+    <text x="250" y="195" font-size="12" text-anchor="middle" fill="#767676">Teste A/B controlado</text>
+    <text x="250" y="213" font-size="12" text-anchor="middle" fill="#767676">antes do rollout total</text>
+  </g>
+
+  <!-- ===================== Marco 2: Validacao ===================== -->
+  <g>
+    <circle cx="600" cy="140" r="26" fill="#EA1D2C"/>
+    <!-- icone: check -->
+    <polyline points="590,141 598,149 612,131" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="600" y="100" font-size="15" font-weight="700" text-anchor="middle" fill="#2d2d2d">Validação</text>
+    <text x="600" y="195" font-size="12" text-anchor="middle" fill="#767676">Recalibração periódica</text>
+    <text x="600" y="213" font-size="12" text-anchor="middle" fill="#767676">com dados novos</text>
+  </g>
+
+  <!-- ===================== Marco 3: Escala ===================== -->
+  <g>
+    <circle cx="950" cy="140" r="26" fill="#EA1D2C"/>
+    <!-- icone: barras em crescimento -->
+    <rect x="938" y="146" width="6" height="8" fill="#ffffff"/>
+    <rect x="947" y="138" width="6" height="16" fill="#ffffff"/>
+    <rect x="956" y="130" width="6" height="24" fill="#ffffff"/>
+
+    <text x="950" y="100" font-size="15" font-weight="700" text-anchor="middle" fill="#2d2d2d">Escala</text>
+    <text x="950" y="195" font-size="12" text-anchor="middle" fill="#767676">Ranking de ofertas +</text>
+    <text x="950" y="213" font-size="12" text-anchor="middle" fill="#767676">melhor momento de envio</text>
+  </g>
+</svg>

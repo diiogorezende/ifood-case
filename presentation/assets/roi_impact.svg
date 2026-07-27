@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" font-family="Arial, Helvetica, sans-serif">
+  <!-- Fundo -->
+  <rect width="1100" height="440" fill="#ffffff"/>
+
+  <!-- Titulo -->
+  <text x="550" y="30" font-size="22" font-weight="700" text-anchor="middle" fill="#2d2d2d">Enviar menos, com mais critério,</text>
+  <text x="550" y="54" font-size="22" font-weight="700" text-anchor="middle" fill="#2d2d2d">muda o resultado de negativo para positivo</text>
+  <rect x="510" y="64" width="80" height="4" rx="2" fill="#EA1D2C"/>
+  <text x="550" y="84" font-size="14" text-anchor="middle" fill="#8a8a8a">Comparação em dados históricos não usados no treino do modelo</text>
+
+  <!-- Cabecalhos das colunas -->
+  <text x="350" y="118" font-size="16" font-weight="700" text-anchor="middle" fill="#2d2d2d">Política atual</text>
+  <text x="350" y="136" font-size="13" text-anchor="middle" fill="#767676">10.135 envios</text>
+
+  <text x="750" y="118" font-size="16" font-weight="700" text-anchor="middle" fill="#2d2d2d">Política com modelo</text>
+  <text x="750" y="136" font-size="13" text-anchor="middle" fill="#767676">3.428 envios (-66%)</text>
+
+  <!-- Linha de base (zero) -->
+  <line x1="150" y1="194" x2="950" y2="194" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="140" y="199" font-size="12" text-anchor="end" fill="#9a9a9a">0</text>
+
+  <!-- Barra: Politica com modelo (positiva, acima da base) -->
+  <rect x="640" y="174" width="220" height="20" rx="8" fill="#ffffff" stroke="#EA1D2C" stroke-width="3"/>
+  <text x="750" y="160" font-size="22" font-weight="700" text-anchor="middle" fill="#EA1D2C">+1.246</text>
+
+  <!-- Barra: Politica atual (negativa, abaixo da base) -->
+  <rect x="240" y="194" width="220" height="150" rx="8" fill="#EA1D2C"/>
+  <text x="350" y="275" font-size="22" font-weight="700" text-anchor="middle" fill="#ffffff">-9.152</text>
+
+  <!-- Callout com os destaques -->
+  <rect x="150" y="364" width="800" height="55" rx="10" fill="#FBEAEB"/>
+  <rect x="150" y="364" width="6" height="55" rx="3" fill="#EA1D2C"/>
+  <text x="175" y="386" font-size="14" font-weight="700" fill="#C21807">+113,6% de melhora no resultado ao direcionar melhor os envios</text>
+  <text x="175" y="407" font-size="14" fill="#8B3A3F">6.707 envios evitados eram, em média, prejuízo esperado (custo maior que retorno)</text>
+</svg>

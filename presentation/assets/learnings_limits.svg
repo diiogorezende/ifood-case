@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" font-family="Arial, Helvetica, sans-serif">
+  <!-- Fundo -->
+  <rect width="1200" height="300" fill="#ffffff"/>
+
+  <!-- Titulo -->
+  <text x="600" y="28" font-size="22" font-weight="700" text-anchor="middle" fill="#2d2d2d">O que aprendemos (e o que ainda não sabemos)</text>
+  <rect x="560" y="38" width="80" height="4" rx="2" fill="#EA1D2C"/>
+  <text x="600" y="58" font-size="13" text-anchor="middle" fill="#8a8a8a">Decisões e limites honestos do modelo</text>
+
+  <!-- ===================== Card 1: BOGO = engajamento ===================== -->
+  <g>
+    <rect x="50" y="72" width="340" height="200" rx="16" fill="#ffffff" stroke="#F3D9DB" stroke-width="3"/>
+    <circle cx="220" cy="112" r="28" fill="#EA1D2C"/>
+    <!-- icone: coracao (engajamento) -->
+    <path d="M220,124 C208,114 205,100 216,100 C218,100 219,101 220,103 C221,101 222,100 224,100 C235,100 232,114 220,124 Z" fill="#ffffff"/>
+
+    <text x="220" y="182" font-size="15" font-weight="700" text-anchor="middle" fill="#2d2d2d">BOGO é engajamento, não lucro</text>
+    <text x="220" y="207" font-size="12" text-anchor="middle" fill="#767676">Devolve 100% do valor mínimo</text>
+    <text x="220" y="224" font-size="12" text-anchor="middle" fill="#767676">ao cliente</text>
+  </g>
+
+  <!-- ===================== Card 2: retrato do passado ===================== -->
+  <g>
+    <rect x="430" y="72" width="340" height="200" rx="16" fill="#ffffff" stroke="#F3D9DB" stroke-width="3"/>
+    <circle cx="600" cy="112" r="28" fill="#EA1D2C"/>
+    <!-- icone: relogio + seta de retorno (backtest) -->
+    <circle cx="600" cy="112" r="13" stroke="#ffffff" stroke-width="2.5" fill="none"/>
+    <line x1="600" y1="112" x2="600" y2="101" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="600" y1="112" x2="608" y2="117" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M584,100 A18 18 0 1 0 600,94" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <polygon points="580,96 588,98 582,104" fill="#ffffff"/>
+
+    <text x="600" y="182" font-size="15" font-weight="700" text-anchor="middle" fill="#2d2d2d">Retrato do passado (backtest)</text>
+    <text x="600" y="207" font-size="12" text-anchor="middle" fill="#767676">Não é garantia de causa-efeito</text>
+    <text x="600" y="224" font-size="12" text-anchor="middle" fill="#767676">futura — falta validar com teste A/B</text>
+  </g>
+
+  <!-- ===================== Card 3: sem grupo de controle ===================== -->
+  <g>
+    <rect x="810" y="72" width="340" height="200" rx="16" fill="#ffffff" stroke="#F3D9DB" stroke-width="3"/>
+    <circle cx="980" cy="112" r="28" fill="#EA1D2C"/>
+    <!-- icone: lupa com interrogacao (inconclusivo) -->
+    <circle cx="975" cy="107" r="11" stroke="#ffffff" stroke-width="2.5" fill="none"/>
+    <line x1="983" y1="115" x2="994" y2="126" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="975" y="112" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff">?</text>
+
+    <text x="980" y="182" font-size="15" font-weight="700" text-anchor="middle" fill="#2d2d2d">Sem grupo de controle real</text>
+    <text x="980" y="207" font-size="12" text-anchor="middle" fill="#767676">Efeito causal puro ainda é</text>
+    <text x="980" y="224" font-size="12" text-anchor="middle" fill="#767676">inconclusivo — não entrou na conta</text>
+  </g>
+</svg>
