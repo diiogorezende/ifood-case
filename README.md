@@ -113,6 +113,11 @@ fosse enviada. Só `bogo`/`discount` entram na conta monetária (`informational`
 
 ## Como rodar
 
+> **Dados brutos não estão incluídos no clone.** `data/raw/*.json` são versionados via DVC, mas
+> `.dvc/config` não tem nenhum remote configurado (cache só local) — `dvc pull` não tem de onde
+> baixar os dados. Antes de rodar o pipeline, copie manualmente `offers.json`, `profile.json` e
+> `transactions.json` para `data/raw/` (ou configure um remote DVC e rode `dvc push`/`dvc pull`).
+
 ```bash
 uv run python -m src.data.process_raw       # raw -> offer_instances_final.parquet
 uv run python -m src.features.build_features  # -> model_features.parquet
