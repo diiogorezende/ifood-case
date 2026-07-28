@@ -22,8 +22,8 @@ final e reprodutível de cada etapa (PySpark no processamento/features, pandas n
   completada (redenção); `informational` (sem evento de redenção) = vista + transação
   subsequente. Taxas de sucesso: discount 41.6%, informational 38.7%, bogo 36.3%.
 - **Sem grupo de controle nativo**: só 6 de 17k clientes nunca receberam oferta →
-  inviável para uplift clássico. Solução: response model como entrega principal; T-Learner
-  com pseudo-controle (janelas "orgânicas" sem oferta ativa) como stretch goal.
+  inviável para uplift clássico. Proposta: T-Learner
+  com pseudo-controle (janelas "orgânicas" sem oferta ativa).
 - **Vazamento temporal**: todas as features de histórico (RFM de transações, taxa de sucesso/
   visualização anterior) usam apenas eventos *estritamente anteriores* ao recebimento da oferta
   (`rowsBetween(unboundedPreceding, -1)`).
@@ -42,22 +42,21 @@ como final:
 
 (Métricas completas de todos os modelos em `src/models/model_metadata.json` / notebook 07.)
 
-## Resultados — uplift T-Learner
+## Resultados — T-Learner
 
 Uplift médio `(P(sucesso tratado) − P(compra orgânica no controle))` por tipo de oferta, todos
 **negativos** (discount −0.22, informational −0.25, bogo −0.28). Resultado tratado como
-**não conclusivo**, não como efeito causal real: a definição de sucesso é assimétrica
-(tratado exige visualização + redenção/transação; controle exige apenas qualquer transação) e
+**não conclusivo**, não como efeito causal real: a definição de sucesso é assimétrica, pois
+tratado exige visualização + redenção/transação e controle exige apenas qualquer transação. E
 as janelas de controle (gaps sem oferta) tendem a ser mais longas que a duração típica da
-oferta — ambos inflam artificialmente a taxa do controle.
+oferta, ou seja, ambos inflam artificialmente a taxa do controle.
 
 **Checagem com métrica comparável**: usando a mesma janela orgânica, mas uma métrica comparável
 (qualquer transação, sem exigir visualização) em vez de `success`, o notebook 05 recalcula o
 uplift tratado vs. orgânico (62.71%) e encontra diferenças pequenas ou negativas para todos os
 tipos: `bogo` +1.8 p.p., `discount` −3.1 p.p. e `informational` −24.0 p.p.. Ou seja, mesmo sob a métrica mais
-permissiva, nenhum `offer_type` mostra incremental real sobre o comportamento orgânico,
-o que é consistente com o sinal negativo do T-Learner — reforçando que o uplift não deve
-orientar decisão de negócio sozinho.
+permissiva, nenhum `offer_type` mostra incremento real sobre o comportamento orgânico,
+o que é consistente com o sinal negativo do T-Learner. Informa que o uplift não deve ser considerado de forma isolada.
 
 ## Simulação de ROI (`main.py`)
 
@@ -69,7 +68,7 @@ fosse enviada. Só `bogo`/`discount` entram na conta monetária (`informational`
   margem ≥100%, ou seja, é estruturalmente um *loss-leader* de engajamento, não de lucro.
 - Com premissas default (`margin_rate=0.30`, `send_cost=0.05`): política atual (enviar para
   todos, 10135 envios) resulta em **-9152** de lucro; política guiada pelo modelo (enviar só
-  quando valor esperado > 0, 3428 envios, 6707 evitados) resulta em **+1246** de lucro
+  quando valor esperado > 0, acarreta em 3428 envios, 6707 evitados) resulta em **+1246** de lucro
   (**+113.6%** de lift). Parâmetros ajustáveis via `--margin-rate`/`--send-cost`.
 
 ## Pontos fortes
@@ -78,20 +77,18 @@ fosse enviada. Só `bogo`/`discount` entram na conta monetária (`informational`
   e módulos `src/` espelhando fielmente a lógica final, validados numericamente contra os
   notebooks.
 - Cuidado explícito com vazamento temporal (features de histórico só usam o passado).
-- Discussão honesta de premissas de negócio (margem, custo de envio) e como elas mudam a
-  decisão ótima (calibração do breakeven por tipo de oferta).
+- Discussão aberta de premissas de negócio (margem, custo de envio) e como elas mudam a
+  decisão ótima.
 - Simulação de ROI compara diretamente política atual vs. guiada pelo modelo, em unidades de
-  negócio (lucro), não só métricas de classificação.
+  negócio, não só métricas de classificação.
 
 ## Fragilidades e limitações
 
 - **Uplift não é causal**: pseudo-controle tem viés estrutural conhecido (assimetria
   de outcome e de duração de janela); resultado não deve orientar decisão de negócio sozinho.
-- **ROI depende de premissas não observadas nos dados** (`margin_rate`, `send_cost`) — números
+- **ROI depende de premissas não observadas nos dados** (`margin_rate`, `send_cost`), números
   absolutos são sensíveis a esses parâmetros, só as ordens de grandeza/heterogeneidade são
   robustas.
-- **Sem tuning de hiperparâmetros** — modelos usam parâmetros default do scikit-learn/LightGBM/
-  XGBoost; sem busca de espaço de hiperparâmetros nem calibração de probabilidade.
 - **Sem validação temporal** — split é aleatório estratificado, não por tempo;
   em produção o modelo será usado para prever o futuro a partir do passado.
 - Ambiguidade não resolvida nas tags de tempo empatadas (transação e oferta no mesmo timestamp)
