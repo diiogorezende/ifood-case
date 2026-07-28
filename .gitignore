@@ -15,6 +15,10 @@ data/raw/*
 data/processed/**
 !data/processed/.gitkeep
 
+# Modelos treinados (binarios regeneraveis via `uv run python -m src.models.train`,
+# nao versionados no git; model_metadata.json continua rastreado)
+src/models/*.joblib
+
 # --- Python ---
 __pycache__/
 *.py[cod]
