@@ -173,6 +173,7 @@ def train_response_models(
         "target_col": TARGET_COL,
         "id_cols": ID_COLS,
         "final_model": "lgbm_model.joblib",
+        "metrics": metrics,
     }
     with open(models_path / "model_metadata.json", "w") as f:
         json.dump(metadata, f, indent=2)
