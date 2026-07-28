@@ -34,13 +34,20 @@ final e reprodutível de cada etapa (PySpark no processamento/features, pandas n
 3 modelos comparados no conjunto de teste (20%, holdout estratificado); **LightGBM** escolhido
 como final:
 
-| Modelo    | ROC-AUC | PR-AUC | Brier |
-|-----------|---------|--------|-------|
-| LogReg    | 0.738 | 0.627 | 0.198 |
-| XGBoost   | 0.799 | 0.701 | 0.176 |
-| **LightGBM** | **0.807** | **0.712** | **0.173** |
+| Modelo    | Accuracy* | Precision* | Recall* | ROC-AUC | PR-AUC | Brier |
+|-----------|-----------|------------|---------|---------|--------|-------|
+| LogReg    | 0.688 | 0.626 | 0.491 | 0.738 | 0.627 | 0.198 |
+| XGBoost   | 0.732 | 0.670 | 0.613 | 0.799 | 0.701 | 0.176 |
+| **LightGBM** | **0.739** | **0.684** | **0.613** | **0.807** | **0.712** | **0.173** |
+
+\* Accuracy/Precision/Recall calculados no corte arbitrário de probabilidade > 0.5 (não
+otimizado para custo de negócio); usados apenas para leitura complementar, o ranking entre
+modelos segue as métricas independentes de threshold (ROC-AUC/PR-AUC/Brier). Como referência,
+o baseline "sempre prever não-sucesso" já teria accuracy ≈ 61% (taxa de sucesso ≈ 38.93%).
 
 (Métricas completas de todos os modelos em `src/models/model_metadata.json` / notebook 07.)
+
+- É necessário, como próximo passo, escolher o threshold de decisão via otimização de valor esperado, em vez de usar o corte fixo de 0.5 nas métricas de accuracy/precision/ recall reportadas no notebook 07.
 
 ## Resultados — T-Learner
 

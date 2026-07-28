@@ -7,12 +7,19 @@ from src.models.train import _evaluate, train_response_models
 
 
 def test_evaluate_returns_expected_metric_keys():
-    y_test = pd.Series([0, 0, 1, 1])
-    proba = np.array([0.1, 0.4, 0.6, 0.9])
+    y_test = pd.Series([0, 0, 1, 1, 1])
+    proba = np.array([0.1, 0.4, 0.5, 0.6, 0.9])
 
     metrics = _evaluate(y_test, proba)
 
-    assert set(metrics) == {"roc_auc", "pr_auc", "brier"}
+    assert set(metrics) == {
+        "accuracy",
+        "precision",
+        "recall",
+        "roc_auc",
+        "pr_auc",
+        "brier",
+    }
     assert 0.0 <= metrics["roc_auc"] <= 1.0
 
 

@@ -14,8 +14,11 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
+    accuracy_score,
     average_precision_score,
     brier_score_loss,
+    precision_score,
+    recall_score,
     roc_auc_score,
 )
 from sklearn.model_selection import train_test_split
@@ -123,6 +126,9 @@ def _train_xgb(X_train: pd.DataFrame, y_train: pd.Series) -> XGBClassifier:
 
 def _evaluate(y_test: pd.Series, proba) -> dict[str, float]:
     return {
+        "accuracy": accuracy_score(y_test, proba > 0.5),
+        "precision": precision_score(y_test, proba > 0.5),
+        "recall": recall_score(y_test, proba > 0.5),
         "roc_auc": roc_auc_score(y_test, proba),
         "pr_auc": average_precision_score(y_test, proba),
         "brier": brier_score_loss(y_test, proba),
